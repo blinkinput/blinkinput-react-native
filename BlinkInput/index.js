@@ -85,6 +85,25 @@ class BlinkInputWrapper {
                   return [];
             }
       }
+      async scanWithFieldByField(fieldByFieldCollection, license) {
+            try {
+                  var licenseObject = license;
+                  if (typeof license === 'string' || license instanceof String) {
+                      licenseObject = { licenseKey: license };
+                  }
+                  const nativeFieldByFieldResult = await BlinkInputNative.scanWithFieldByField(fieldByFieldCollection, licenseObject);
+
+                  let results = [];
+                  for (let i = 0; i < nativeFieldByFieldResult.length; ++i) {
+                        let result = new FieldByFieldResult(nativeFieldByFieldResult[i]);
+                        results.push(result);
+                  }
+                  return results;
+            } catch (error) {
+                  console.log(error);
+                  return [];
+            }
+      }
 }
 
 export var BlinkInput = new BlinkInputWrapper();
@@ -123,6 +142,74 @@ export class RecognizerCollection {
             }
       }
 }
+
+import { Parser } from './parser'
+
+/**
+ * Represents a collection of scane elements
+ */
+export class FieldByFieldCollection {
+      /**
+       * 
+       * @param fieldByFieldElementArray Array of field by field elements objects that will be used for recognition. Must not be empty!
+       */
+      constructor(fieldByFieldElementArray) {
+            /** Array of recognizer objects that will be used for recognition */
+            this.fieldByFieldElementArray = fieldByFieldElementArray;
+
+            if (!(this.fieldByFieldElementArray instanceof Array)) {
+                  throw new Error("recognizerArray must be array of Recognizer objects!");
+            }
+            // ensure every element in array is Recognizer
+            for (var i = 0; i < this.fieldByFieldElementArray.length; ++i) {
+                  if (!(this.fieldByFieldElementArray[i] instanceof FieldByFieldElement )) {
+                        throw new Error( "Each element in fieldByFieldElementArray must be instance of FieldByFieldElement" );
+                  }
+            }
+      }
+}
+
+export class FieldByFieldElement {
+      constructor(identifier, parser, localizedTitle, localizedTooltip) {
+            /**
+             * Unique name of the element
+             */
+            this.identifier = identifier;
+
+            /**
+            Parser object which is reponsible scanning the text.
+            */
+            this.parser = parser;
+            
+            /**
+            * Localized title (used in the Pivot control)
+            */
+            this.localizedTitle = localizedTitle;
+
+            /**
+            * Localized tooltip (used in the tooltip label above the viewfinder)
+            */
+            this.localizedTooltip = localizedTooltip;
+
+            if (!(this.parser instanceof Parser)) {
+                  throw new Error("Parser must be instance of Parser!");
+            }
+      }
+}
+
+export class FieldByFieldResult {
+      constructor(nativeFieldByFieldResult) {
+            /**
+             * Unique name of the element
+             */
+            this.identifier = nativeFieldByFieldResult.identifier;
+
+            /**
+            Value of parser object after scanning.
+            */
+            this.value = nativeFieldByFieldResult.value;
+      }
+}
 import { DocumentCaptureRecognizerResult } from './recognizers/documentCaptureRecognizer'
 /**
  * Represents a result of 'captureDocument' functionality.
@@ -146,7 +233,6 @@ export * from './recognizers/barcodeRecognizer'
 export * from './recognizers/documentCaptureRecognizer'
 export * from './recognizers/pdf417Recognizer'
 export * from './recognizers/simNumberRecognizer'
-export * from './recognizers/vinRecognizer'
 export * from './recognizers/blinkInputRecognizer'
 
 export { ParserResultState } from './parser'

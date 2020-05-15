@@ -17,12 +17,6 @@
 -(MBParser *) createParser:(NSDictionary*) jsonParser {
     MBRawParser *parser = [[MBRawParser alloc] init];
     {
-        id ocrEngineOptions = [jsonParser valueForKey:@"ocrEngineOptions"];
-        if (ocrEngineOptions != nil) {
-            parser.ocrEngineOptions = [MBBlinkInputSerializationUtils deserializeBaseOcrEngineOptions:(NSDictionary*)ocrEngineOptions];
-        }
-    }
-    {
         id useSieve = [jsonParser valueForKey:@"useSieve"];
         if (useSieve != nil) {
             parser.useSieve = [(NSNumber *)useSieve boolValue];

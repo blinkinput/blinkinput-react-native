@@ -6,7 +6,8 @@
 #import "MBDocumentCaptureRecognizerWrapper.h"
 #import "MBPdf417RecognizerWrapper.h"
 #import "MBSimNumberRecognizerWrapper.h"
-#import "MBVinRecognizerWrapper.h"
+#import "MBBlinkInputRecognizerWrapper.h"
+
 
 @interface MBRecognizerSerializers ()
 
@@ -29,7 +30,8 @@
         [self registerCreator:[[MBDocumentCaptureRecognizerCreator alloc] init]];
         [self registerCreator:[[MBPdf417RecognizerCreator alloc] init]];
         [self registerCreator:[[MBSimNumberRecognizerCreator alloc] init]];
-        [self registerCreator:[[MBVinRecognizerCreator alloc] init]];
+        [self registerCreator:[[MBBlinkInputRecognizerCreator alloc] init]];
+        
     }
     return self;
 }

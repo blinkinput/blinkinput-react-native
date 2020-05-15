@@ -9,6 +9,7 @@
 #import "MBRawParserWrapper.h"
 #import "MBTopUpParserWrapper.h"
 #import "MBVinParserWrapper.h"
+#import "MBRegexParserWrapper.h"
 
 @interface MBParserSerializers ()
 
@@ -26,6 +27,8 @@
     self = [super init];
     if (self) {
         _parserSerializers = [[NSMutableDictionary alloc] init];
+        
+        [self registerCreator:[[MBRegexParserCreator alloc] init]];
         [self registerCreator:[[MBAmountParserCreator alloc] init]];
         [self registerCreator:[[MBDateParserCreator alloc] init]];
         [self registerCreator:[[MBEmailParserCreator alloc] init]];

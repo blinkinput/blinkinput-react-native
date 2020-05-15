@@ -5,6 +5,7 @@ import {
     Quadrilateral,
     
     
+    ImageExtensionFactors,
 } from '../types'
 
 /**

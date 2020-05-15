@@ -44,11 +44,11 @@ export class Quadrilateral {
  * Represents base ocr options
  */
 export class BaseOcrEngineOptions {
-    constructor(nativeOcrEngineOptions) {
+    constructor() {
         /** maximal chars expected on the image. */
-        this.maxCharsExpected = nativeOcrEngineOptions.maxCharsExpected;
+        this.maxCharsExpected = 3000;
         /** specifies if the additional image processing which drops the background colors should be performed. */
-        this.colorDropoutEnabled = nativeOcrEngineOptions.colorDropoutEnabled;
+        this.colorDropoutEnabled = false;
     }
 }
 

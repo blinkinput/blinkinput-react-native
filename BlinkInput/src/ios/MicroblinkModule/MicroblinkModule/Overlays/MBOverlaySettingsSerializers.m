@@ -10,6 +10,7 @@
 #import "MBOverlayVCCreator.h"
 #import "MBBarcodeOverlaySettingsSerialization.h"
 #import "MBDocumentCaptureOverlaySettingsSerialization.h"
+#import "MBFieldByFieldOverlaySettingsSerialization.h"
 
 @interface MBOverlaySettingsSerializers ()
 
@@ -29,6 +30,7 @@
         _overlayCreators = [[NSMutableDictionary alloc] init];
         [self registerMapping:[[MBBarcodeOverlaySettingsSerialization alloc] init]];
         [self registerMapping:[[MBDocumentCaptureOverlaySettingsSerialization alloc] init]];
+        [self registerMapping:[[MBFieldByFieldOverlaySettingsSerialization alloc] init]];
     }
     return self;
 }
@@ -49,6 +51,10 @@
 
 -(MBOverlayViewController *) createDocumentCaptureOverlayViewControllerWithCollection:(MBRecognizerCollection*)recognizerCollection delegate:(id<MBOverlayViewControllerDelegate>)delegate {
     return [[self.overlayCreators valueForKey:@"DocumentCaptureOverlaySettings"] createOverlayViewController:nil recognizerCollection:recognizerCollection delegate:delegate];
+}
+
+-(MBOverlayViewController *) createFieldByFieldOverlayViewControllerWithScanelements:(NSArray<MBScanElement *> *)scanElements delegate:(id<MBOverlayViewControllerDelegate>)delegate {
+    return [[self.overlayCreators valueForKey:@"FieldByFieldOverlaySettings"] createOverlayViewControllerWithScanElements:scanElements delegate:delegate];
 }
 
 @end

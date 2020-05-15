@@ -20,4 +20,7 @@
 
 @property (nonatomic, nonnull, readonly) NSString *jsonName;
 
+@optional
+-(MBOverlayViewController *) createOverlayViewControllerWithScanElements:(NSArray<MBScanElement *> *)scanElements delegate:(id<MBOverlayViewControllerDelegate>) delegate;
+
 @end

@@ -54,12 +54,7 @@ export default class BlinkInputReactNativeApp extends Component {
     async scan() {
         try {
 
-            // to scan any machine readable travel document (passports, visa's and IDs with 
-            // machine readable zone), use MrtdRecognizer
-            // var mrtdRecognizer = new BlinkInputReactNative.MrtdRecognizer();
-            // mrtdRecognizer.returnFullDocumentImage = true;
-
-            // var mrtdSuccessFrameGrabber = new BlinkInputReactNative.SuccessFrameGrabberRecognizer(mrtdRecognizer);
+            // var mrtdSuccessFrameGrabber = new BlinkInputReactNative.SuccessFrameGrabberRecognizer(pdf417Recognizer);
 
             // BlinkIDCombinedRecognizer automatically classifies different document types and scans the data from
             // the supported document
@@ -148,37 +143,60 @@ export default class BlinkInputReactNativeApp extends Component {
         }
     }
 
+    async scanFieldByField() {
+        try {
+
+            var fieldByFieldElement = new BlinkInputReactNative.FieldByFieldElement('Raw', new BlinkInputReactNative.RawParser(), 'Raw Text', 'Scan text');
+            var fieldByFieldCollection = new BlinkInputReactNative.FieldByFieldCollection([fieldByFieldElement]);
+
+            const fieldByFieldResult = await BlinkInputReactNative.BlinkInput.scanWithFieldByField(
+                fieldByFieldCollection,
+                licenseKey
+            );
+
+            if (fieldByFieldResult) {
+                let newState = createEmptyState();
+
+                for (let i = 0; i < fieldByFieldResult.length; ++i) {
+                    let localState = this.handleResult(fieldByFieldResult[i]);
+                    newState.showDocumentImage1 = newState.showDocumentImage1 || localState.showDocumentImage1;
+                    if (localState.showDocumentImage1) {
+                        newState.resultFrontImageDocument = localState.resultFrontImageDocument;
+                    }
+                    newState.showDocumentImage2 = newState.showDocumentImage2 || localState.showDocumentImage2;
+                    if (localState.showDocumentImage2) {
+                        newState.resultBackImageDocument = localState.resultBackImageDocument;
+                    }
+                    newState.showImageFace = newState.showImageFace || localState.showImageFace;
+                    if (localState.resultImageFace) {
+                        newState.resultImageFace = localState.resultImageFace;
+                    }
+                    newState.results += localState.results;
+                    newState.showSuccessFrame = newState.showSuccessFrame || localState.showSuccessFrame;
+                    if (localState.successFrame) {
+                        newState.successFrame = localState.successFrame;
+                    }
+                }
+
+                newState.results += '\n';
+                this.setState(newState);
+            }
+        } catch (error) {
+            console.log(error);
+            this.setState({ showDocumentImage1: false, resultFrontImageDocument: '', showDocumentImage2: false, resultBackImageDocument: '', showImageFace: false, resultImageFace: '', results: 'Scanning has been cancelled', showSuccessFrame: false,
+            successFrame: ''});
+        }
+    }
+
     handleResult(result) {
         let fieldDelim = ";\n";
         
         var localState = createEmptyState();
         
         if (result instanceof BlinkInputReactNative.Pdf417RecognizerResult) {
-            let blinkIdResult = result;
+            let pdf417Result = result;
             let resultString =
-                "Data: " + blinkIdResult.stringData + fieldDelim;
-            if (blinkIdResult.dateOfBirth) {
-                resultString +=
-                    "Date of birth: " +
-                        blinkIdResult.dateOfBirth.day + "." +
-                        blinkIdResult.dateOfBirth.month + "." +
-                        blinkIdResult.dateOfBirth.year + "." + fieldDelim;
-            }
-            if (blinkIdResult.dateOfIssue) {
-                resultString +=
-                    "Date of issue: " +
-                        blinkIdResult.dateOfIssue.day + "." +
-                        blinkIdResult.dateOfIssue.month + "." +
-                        blinkIdResult.dateOfIssue.year + "." + fieldDelim;
-            }
-            if (blinkIdResult.dateOfExpiry) {
-                resultString +=
-                    "Date of expiry: " +
-                        blinkIdResult.dateOfExpiry.day + "." +
-                        blinkIdResult.dateOfExpiry.month + "." +
-                        blinkIdResult.dateOfExpiry.year + "." + fieldDelim;
-            }
-            // there are other fields to extract
+                "Data: " + pdf417Result.stringData + fieldDelim;
             localState.results += resultString;
 
         } else if (result instanceof BlinkInputReactNative.DocumentCaptureResult) {
@@ -192,6 +210,12 @@ export default class BlinkInputReactNativeApp extends Component {
                 localState.showDocumentImage2 = true;
                 localState.resultBackImageDocument = 'data:image/jpg;base64,' + result.capturedFullImage;
             }
+        } else if (result instanceof BlinkInputReactNative.FieldByFieldResult) {
+            localState.results = "Field by Field result";
+            let fieldByfieldResult = result;
+            let resultString =
+                "Identifier: " + fieldByfieldResult.identifier + fieldDelim + "Value: " + fieldByfieldResult.value + fieldDelim;
+            localState.results += resultString;
         }
         return localState;
     }
@@ -216,6 +240,13 @@ export default class BlinkInputReactNativeApp extends Component {
             <Button
                 onPress={this.captureDocument.bind(this)}
                 title="Capture document"
+                color="#87c540"
+            />
+            </View>
+            <View style={styles.buttonContainer}>
+            <Button
+                onPress={this.scanFieldByField.bind(this)}
+                title="Field by Field Scanning BlinkInput"
                 color="#87c540"
             />
             </View>

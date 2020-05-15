@@ -28,14 +28,6 @@ export class RawParser extends Parser {
         super('RawParser');
         
         /** 
-         * Sets the OCR engine options used in Regex OCR parser.
-         * Returns the OCR engine options used in Regex OCR parser.
-         * 
-         *  
-         */
-        this.ocrEngineOptions = new BaseOcrEngineOptions();
-        
-        /** 
          * Enable the usage of algorithm for combining consecutive OCR results between video frames
          * for improving OCR quality. By default this is turned off.
          * Note: This option works together only with if instance of {@link com.microblink.entities.ocrengine.legacy.BlinkOCREngineOptions} is given

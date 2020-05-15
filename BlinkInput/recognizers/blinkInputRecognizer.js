@@ -1,4 +1,5 @@
 import { Recognizer, RecognizerResult } from '../recognizer'
+import { Processor } from '../processor'
 import {
     Date
 } from '../types'

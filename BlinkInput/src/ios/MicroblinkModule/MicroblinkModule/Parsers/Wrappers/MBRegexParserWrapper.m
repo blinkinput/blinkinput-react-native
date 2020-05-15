@@ -25,12 +25,6 @@
         }
     }
     {
-        id ocrEngineOptions = [jsonParser valueForKey:@"ocrEngineOptions"];
-        if (ocrEngineOptions != nil) {
-            parser.ocrEngineOptions = [MBBlinkInputSerializationUtils deserializeBaseOcrEngineOptions:(NSDictionary*)ocrEngineOptions];
-        }
-    }
-    {
         id regex = [jsonParser valueForKey:@"regex"];
         if (regex != nil) {
             parser.regex = (NSString *)regex;

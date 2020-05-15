@@ -17,4 +17,6 @@
 @optional
 - (void)overlayViewControllerDidFinishScanning:(MBOverlayViewController *)overlayViewController highResImage:(MBImage *)highResImage state:(MBRecognizerResultState)state;
 
+- (void)overlayViewControllerDidFinishScanning:(MBOverlayViewController *)overlayViewController didFinishScanningWithElements:(NSArray<MBScanElement *> *)scanElements;
+
 @end

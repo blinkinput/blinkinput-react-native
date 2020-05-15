@@ -19,4 +19,6 @@
 
 -(MBOverlayViewController *) createDocumentCaptureOverlayViewControllerWithCollection:(MBRecognizerCollection*)recognizerCollection delegate:(id<MBOverlayViewControllerDelegate>)delegate;
 
+-(MBOverlayViewController *) createFieldByFieldOverlayViewControllerWithScanelements:(NSArray<MBScanElement *> *)scanElements delegate:(id<MBOverlayViewControllerDelegate>)delegate;
+
 @end
