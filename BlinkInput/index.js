@@ -233,7 +233,7 @@ export * from './recognizers/barcodeRecognizer'
 export * from './recognizers/documentCaptureRecognizer'
 export * from './recognizers/pdf417Recognizer'
 export * from './recognizers/simNumberRecognizer'
-export * from './recognizers/blinkInputRecognizer'
+// export * from './recognizers/blinkInputRecognizer'
 
 export { ParserResultState } from './parser'
 export { ProcessorResultState } from './processor'
@@ -249,7 +249,7 @@ export * from './parsers/topUpParser'
 export * from './parsers/vinParser'
 export * from './parsers/regexParser'
 
-// export processors that can be used and their results
-export * from './processors/parserGroupProcessor'
-export * from './processors/imageReturnProcessor'
+// // export processors that can be used and their results
+// export * from './processors/parserGroupProcessor'
+//
 
