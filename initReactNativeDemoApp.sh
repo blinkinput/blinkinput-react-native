@@ -45,7 +45,7 @@ pod install
 
 if false; then
   echo "Replace pod with custom dev version of nput framework"
-  # replace pod with custom dev version of BlinkID framework
+  # replace pod with custom dev version of BlinkInput framework
   pushd Pods/PPBlinkOCR
   rm -rf Microblink.bundle
   rm -rf Microblink.framework
@@ -73,6 +73,6 @@ cp ../demoApp/index.js ./
 cp index.js index.ios.js
 cp index.js index.android.js
 
-echo "Go to React Native project folder: cd BlinkIDReactNative"
+echo "Go to React Native project folder: cd BlinkInputReactNative"
 echo "To run on Android execute: react-native run-android"
-echo "To run on iOS: go to BlinkIDReactNative/ios and open BlinkIDReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
+echo "To run on iOS: go to BlinkInputReactNative/ios and open BlinkInputReactNative.xcworkspace; set your development team and add Privacy - Camera Usage Description key to Your info.plist file and press run"
