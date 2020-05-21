@@ -12,7 +12,7 @@ npx react-native init --version="0.61.5" BlinkInputReactNative
 # enter into demo project folder
 pushd BlinkInputReactNative
 
-if false; then
+if true; then
   # download npm package
   echo "Downloading blinkinput-react-native module"
   npm install --save blinkinput-react-native
@@ -21,7 +21,7 @@ else
   # use directly source code from this repo instead of npm package
   # from RN 0.57 symlink does not work any more
   npm pack $blink_id_plugin_path
-  npm install --save blinkinput-react-native-4.2.0.tgz
+  npm install --save blinkinput-react-native-4.3.0.tgz
   #pushd node_modules
     #ln -s $blink_id_plugin_path blinkinput-react-native
   #popd

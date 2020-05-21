@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.header_dir    = "blinkinput-react-native"
 
   s.dependency 'React'
-  s.dependency 'PPBlinkOCR', '~> 4.2.0'
+  s.dependency 'PPBlinkOCR', '~> 4.3.0'
 
   s.frameworks = 'UIKit'
 end
