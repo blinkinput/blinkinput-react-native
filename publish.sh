@@ -1,4 +1,4 @@
-FOLDER='BlinkID'
+FOLDER='BlinkInput'
 
 pushd $FOLDER > /dev/null || exit 1
 
