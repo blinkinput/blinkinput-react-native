@@ -29,6 +29,7 @@ public enum ParserSerializers {
         registerMapping(new RawParserSerialization());
         registerMapping(new TopUpParserSerialization());
         registerMapping(new VinParserSerialization());
+        registerMapping(new RegexParserSerialization());
     }
 
     private void registerMapping( ParserSerialization parserSerialization ) {

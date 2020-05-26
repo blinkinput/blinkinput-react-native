@@ -19,7 +19,7 @@ public final class LicensePlatesParserSerialization implements ParserSerializati
         com.microblink.entities.parsers.licenseplates.LicensePlatesParser.Result result = ((com.microblink.entities.parsers.licenseplates.LicensePlatesParser)parser).getResult();
         WritableMap jsonResult = new WritableNativeMap();
         SerializationUtils.addCommonParserResultData(jsonResult, result);
-        jsonResult.putString("licensePlateString", result.getLicensePlateString());
+        jsonResult.putString("licensePlate", result.getLicensePlate());
         return jsonResult;
     }
 
