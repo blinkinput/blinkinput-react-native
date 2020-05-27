@@ -1,0 +1,49 @@
+{
+  "name": "blinkinput-react-native",
+  "version": "4.3.0",
+  "description": "A small and powerful scanning library. Powered by Microblink (www.microblink.com).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlinkInput/blinkinput-react-native.git"
+  },
+  "keywords": [
+    "scan",
+    "id",
+    "scanner",
+    "identity",
+    "ID",
+    "passport",
+    "licence",
+    "sdk",
+    "ocr",
+    "USDL",
+    "PDF417",
+    "MRZ",
+    "MRTD",
+    "barcode",
+    "DL",
+    "card",
+    "document",
+    "microblink",
+    "react-native",
+    "blinkinput",
+    "ID",
+    "ios",
+    "android"
+  ],
+  "author": "Microblink",
+  "license": "MIT",
+  "homepage": "https://github.com/BlinkInput/blinkinput-react-native",
+  "bugs": {
+    "url": "https://github.com/BlinkInput/blinkinput-react-native/issues"
+  },
+  "rnpm": {
+    "android": {
+      "sourceDir": "./src/android"
+    },
+    "ios": {
+      "sourceDir": "./src/ios"
+    }
+  }
+}
