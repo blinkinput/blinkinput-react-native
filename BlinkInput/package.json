@@ -1,7 +1,7 @@
 {
   "name": "blinkinput-react-native",
   "version": "4.3.0",
-  "description": "A small and powerful ID card scanning library. Powered by Microblink (www.microblink.com).",
+  "description": "A small and powerful scanning library. Powered by Microblink (www.microblink.com).",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "document",
     "microblink",
     "react-native",
-    "blinkid",
+    "blinkinput",
     "ID",
     "ios",
     "android"
