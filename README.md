@@ -7,7 +7,7 @@ This repository contains example wrapper for BlinkInput native SDK for [Android]
 
 - [Generate](https://microblink.com/login?url=/customer/generatedemolicence) a **free demo license key** to start using the SDK in your app (registration required)
 
-- Get the product and licensing of [BlinkInput](https://microblink.com/products/blinkinput)
+- Get the information about product and licensing of [BlinkInput](https://microblink.com/products/blinkinput)
 
 ## React Native Version
 
